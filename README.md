@@ -9,5 +9,6 @@ Server app which exposes an I3S Finger Print database via a RESTful interface.
 2. `node index.js` (or use your choice of `forever`, etc.)
 
 # Usage
+* Fetch fingerprints for all individuals in the DB: `GET http://i3s-server:8000/`
 * Fetch all fingerprints for individual WS001: `GET http://i3s-server:8000/WS001`
 * Fetch a specific fingerprint for individual WS001: `GET http://i3s-server:8000/WS001/WS001 - Hoadhum_LEFT.fgp`
