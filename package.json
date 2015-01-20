@@ -1,0 +1,28 @@
+{
+  "name": "i3s-fgp-server",
+  "version": "0.0.0",
+  "description": "Server app which exposes an I3S Finger Print database via a RESTful interface.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsravenous/i3s-fgp-server.git"
+  },
+  "keywords": [
+    "photo",
+    "ID",
+    "I3S",
+    "wildlife"
+  ],
+  "author": "Tom Jenkins <tom@itsravenous.com>",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/itsravenous/i3s-fgp-server/issues"
+  },
+  "homepage": "https://github.com/itsravenous/i3s-fgp-server",
+  "dependencies": {
+    "i3s-db-utils": "0.0.2"
+  }
+}
