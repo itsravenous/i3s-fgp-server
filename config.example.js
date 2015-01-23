@@ -5,5 +5,6 @@
 
 module.exports = {
 	"fgpDir": "/home/sharky/db",
-	"port": 8000
+	"port": 8000,
+	"env": "development"
 }

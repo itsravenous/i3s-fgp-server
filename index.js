@@ -9,6 +9,10 @@ var http = require('http'),
 // Route requests
 server.on('request', function (req, res) {
 
+	var getAnimalURL = function (id) {
+		return req.headers.host + '/' + id;
+	}
+
 	var addFGPLinks = function (fgp) {
 		fgp.links = [
 			{
@@ -19,21 +23,54 @@ server.on('request', function (req, res) {
 		return fgp;
 	}
 
+	var addAnimalLinks = function (id) {
+		var result = {
+			id: id
+		};
+		result.links = [
+			{
+				rel: 'animal',
+				url: getAnimalURL(id)
+			}
+		];
+		return result;
+	}
+
 	var url_parts = url.parse(req.url);
 	var reqPath = decodeURIComponent(url_parts.path);
 
+	if (config.env == 'development') console.log(req.method, reqPath);
+
 	if (reqPath == '/') {
-		// Fetch fingerprints for all individuals
-		var result = dbUtils.getAllFingerprints(config.fgpDir);
-		result = [].concat.apply(result);
-		result.map(addFGPLinks);
+		// Fetch index of individuals
+		var result = dbUtils.getAnimals(config.fgpDir);
+		if (result) {
+			result = result.map(addAnimalLinks);
+		} else {
+			result = [];
+		}
 	} else {
 		// Fetch fingerprints for an individual
-		var result = dbUtils.getFingerprintsForIndividual(path.join(config.fgpDir, reqPath));
-		result = result.map(addFGPLinks);
+		var result = {
+			id: reqPath
+		};
+		var fgps = dbUtils.getFingerprintsForAnimal(path.join(config.fgpDir, reqPath));
+		if (fgps) {
+			result.fgps = fgps.map(addFGPLinks);
+		}
 	}
+-
+	res.setHeader('Access-Control-Allow-Origin', '*');
 
-	res.end(JSON.stringify(result));	
+	// Request methods you wish to allow
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+	// Request headers you wish to allow
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+	res.setHeader('Content-Type', 'application/json');
+
+	res.end(JSON.stringify(result));
 });
 
 // Start server
