@@ -59,7 +59,7 @@ server.on('request', function (req, res) {
 			result.fgps = fgps.map(addFGPLinks);
 		}
 	}
--
+
 	res.setHeader('Access-Control-Allow-Origin', '*');
 
 	// Request methods you wish to allow
