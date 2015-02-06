@@ -10,14 +10,14 @@ var http = require('http'),
 server.on('request', function (req, res) {
 
 	var getAnimalURL = function (id) {
-		return req.headers.host + '/' + id;
+		return 'http://'+req.headers.host + '/' + id;
 	}
 
 	var addFGPLinks = function (fgp) {
 		fgp.links = [
 			{
 				rel: 'animal',
-				url: req.headers.host + reqPath
+				url: 'http://'+req.headers.host + reqPath
 			}
 		]
 		return fgp;
