@@ -51,8 +51,12 @@ server.on('request', function (req, res) {
 		}
 	} else {
 		// Fetch fingerprints for an individual
+		var idAndName = reqPath.substr(1).split('-'),
+			id = idAndName[0].trim(),
+			name = idAndName.length > 1 ? idAndName[1].trim() : null;
 		var result = {
-			id: reqPath.substr(1)
+			id: id,
+			name: name
 		};
 		var fgps = dbUtils.getFingerprintsForAnimal(path.join(config.fgpDir, reqPath));
 		if (fgps) {
