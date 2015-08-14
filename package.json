@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/itsravenous/i3s-fgp-server",
   "dependencies": {
-    "i3s-db-utils": "0.0.5"
+    "i3s-db-utils": "^0.1.0"
   }
 }
